@@ -78,9 +78,18 @@ namespace LegoGif
 
         public static IEnumerable<int> CameraAngles()
         {
-            for (int i = 0; i < 360; i++)
+            var done = new bool[360];
+
+            for (var step = 360; step >= 1; step /= 2)
             {
-                yield return i;
+                for (int i = 0; i < 360; i += step)
+                {
+                    if (!done[i])
+                    {
+                        done[i] = true;
+                        yield return i;
+                    }
+                }
             }
         }
 
