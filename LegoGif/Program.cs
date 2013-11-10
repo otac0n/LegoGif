@@ -9,6 +9,7 @@
 namespace LegoGif
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using Microsoft.Win32;
@@ -17,27 +18,29 @@ namespace LegoGif
     {
         private static readonly Lazy<string> LDPath = new Lazy<string>(() =>
         {
-            var paths = new string[3];
-
-            using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\LDView.exe"))
-            {
-                paths[0] = key.GetValue("") as string;
-            }
-
-            if (paths[0] != null)
-            {
-                paths[0] = Path.GetDirectoryName(paths[0]);
-            }
-
-            paths[1] = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "LDView");
-            paths[2] = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "LDView");
-
-            return paths.FirstOrDefault(p => p != null && Directory.Exists(p));
+            return GetLDrawPaths().FirstOrDefault(p => p != null && Directory.Exists(p));
         });
 
         public static void Main(string[] args)
         {
             Console.WriteLine(LDPath.Value);
+        }
+
+        public static IEnumerable<string> GetLDrawPaths()
+        {
+            yield return Environment.GetEnvironmentVariable("LDRAWDIR");
+
+            using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\LDView.exe"))
+            {
+                var value = key.GetValue("") as string;
+                if (value != null)
+                {
+                    yield return Path.GetDirectoryName(value);
+                }
+            }
+
+            yield return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "LDView");
+            yield return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "LDView");
         }
     }
 }
