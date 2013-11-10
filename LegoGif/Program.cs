@@ -23,7 +23,7 @@ namespace LegoGif
 
         public static void Main(string[] args)
         {
-            Console.WriteLine(LDPath.Value);
+            Environment.SetEnvironmentVariable("LDRAWDIR", LDPath.Value, EnvironmentVariableTarget.Process);
         }
 
         public static IEnumerable<string> GetLDrawPaths()
