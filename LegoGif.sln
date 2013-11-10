@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegoGif", "LegoGif\LegoGif.csproj", "{18388AF9-2C67-42B1-AC0A-685457705022}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF0151AC-7D4E-4B90-9160-C5AEEA18B262}"
+	ProjectSection(SolutionItems) = preProject
+		CodeAnalysis.ruleset = CodeAnalysis.ruleset
+		CustomDictionary.xml = CustomDictionary.xml
+		license.md = license.md
+		readme.md = readme.md
+		Settings.StyleCop = Settings.StyleCop
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7D258B0F-C755-4700-883F-A70B7D42C583}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\nuget.exe = .nuget\nuget.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18388AF9-2C67-42B1-AC0A-685457705022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18388AF9-2C67-42B1-AC0A-685457705022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18388AF9-2C67-42B1-AC0A-685457705022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18388AF9-2C67-42B1-AC0A-685457705022}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
