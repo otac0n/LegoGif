@@ -42,7 +42,7 @@ namespace LegoGif
                 var l3pStartInfo = new ProcessStartInfo
                 {
                     FileName = "l3p.exe",
-                    Arguments = string.Format("-stdout \"{0}\" {1} -o -cg30,{2}", file, povFile, angle, LDPath.Value),
+                    Arguments = string.Format("-stdout \"{0}\" {1} -o -cg30,{2} -q4 -iblighting.pov", file, povFile, angle, LDPath.Value),
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
@@ -55,6 +55,9 @@ namespace LegoGif
                     p.WaitForExit();
                 }
 
+                var contents = File.ReadAllText(povFile);
+                File.WriteAllText(povFile, contents.Replace("reflection 0.08", "reflection 0.04").Replace("color rgb <1,1,1>", "color rgb 0.4 * <1,1,1>"));
+
                 var povStartInfo = new ProcessStartInfo
                 {
                     FileName = PovRayPath.Value,
@@ -62,7 +65,6 @@ namespace LegoGif
                     RedirectStandardError = true,
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
-                    WindowStyle = ProcessWindowStyle.Minimized,
                 };
 
                 using (var p = Process.Start(povStartInfo))
