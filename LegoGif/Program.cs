@@ -38,6 +38,12 @@ namespace LegoGif
             {
                 var frameName = "frame_" + angle;
                 var povFile = frameName + ".pov";
+                var pngFile = frameName + ".png";
+
+                if (File.Exists(pngFile))
+                {
+                    continue;
+                }
 
                 var l3pStartInfo = new ProcessStartInfo
                 {
