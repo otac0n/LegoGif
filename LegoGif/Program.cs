@@ -61,8 +61,11 @@ namespace LegoGif
                     p.WaitForExit();
                 }
 
-                var contents = File.ReadAllText(povFile);
-                File.WriteAllText(povFile, contents.Replace("reflection 0.08", "reflection 0.04").Replace("color rgb <1,1,1>", "color rgb 0.4 * <1,1,1>"));
+                var contents = File.ReadAllText(povFile)
+                    .Replace("reflection 0.08", "reflection 0.04")
+                    .Replace("color rgb <1,1,1>", "color rgb 0.4 * <1,1,1>")
+                    .Replace("#declare L3FinishPearlescent = finish { L3FinishOpaque }", "#declare L3FinishPearlescent = finish { ambient 0.25 diffuse 0.6 brilliance 3 metallic specular 0.80 roughness 10/100 reflection 0.2 }");
+                File.WriteAllText(povFile, contents);
 
                 var povStartInfo = new ProcessStartInfo
                 {
