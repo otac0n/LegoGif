@@ -34,7 +34,7 @@ namespace LegoGif
 
             Environment.SetEnvironmentVariable("LDRAWDIR", LDPath.Value, EnvironmentVariableTarget.Process);
 
-            foreach (var angle in CameraAngles())
+            foreach (var angle in CameraAngles(start: 45))
             {
                 var frameName = "frame_" + angle;
                 var povFile = frameName + ".pov";
@@ -87,18 +87,18 @@ namespace LegoGif
             }
         }
 
-        public static IEnumerable<int> CameraAngles()
+        public static IEnumerable<int> CameraAngles(bool forceOrder = false, int start = 0)
         {
             var done = new bool[360];
 
-            for (var step = 360; step >= 1; step /= 2)
+            for (var step = forceOrder ? 1 : 360; step >= 1; step /= 2)
             {
                 for (int i = 0; i < 360; i += step)
                 {
                     if (!done[i])
                     {
                         done[i] = true;
-                        yield return i;
+                        yield return (i + start) % 360;
                     }
                 }
             }
